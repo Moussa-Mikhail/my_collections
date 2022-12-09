@@ -14,7 +14,7 @@ public class SortedArray<T> implements Collection<T> {
         this.comparator = comparator;
     }
 
-    public SortedArray(Comparator<T> comparator, Collection<T> collection) {
+    public SortedArray(Collection<T> collection, Comparator<T> comparator) {
         this.comparator = comparator;
         addAll(collection);
     }
@@ -31,11 +31,30 @@ public class SortedArray<T> implements Collection<T> {
     public boolean add(T t) {
         int index = find(t);
         if (index == -1) {
-            list.add(t);
+            insert(t);
         } else {
             list.add(index, t);
         }
         return true;
+    }
+
+    private void insert(T t) {
+        if (list.isEmpty()) {
+            list.add(t);
+            return;
+        }
+
+        if (comparator.compare(t, list.get(0)) < 0) {
+            list.add(0, t);
+            return;
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            if (comparator.compare(t, list.get(i)) < 0) {
+                list.add(i, t);
+                return;
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
