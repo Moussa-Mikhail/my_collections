@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * @author Moussa
+ * Array whose elements are kept sorted.
  */
 public class SortedArray<T> implements Collection<T> {
     private final List<T> list = new ArrayList<>();
