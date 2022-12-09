@@ -37,14 +37,6 @@ public class InsertionOrderMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public V put(K key, V value) {
-        if (!map.containsKey(key)) {
-            list.add(key);
-        }
-        return map.put(key, value);
-    }
-
-    @Override
     public V remove(Object key) {
         list.remove(key);
         return map.remove(key);
@@ -55,6 +47,14 @@ public class InsertionOrderMap<K, V> implements Map<K, V> {
         for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
             put(entry.getKey(), entry.getValue());
         }
+    }
+
+    @Override
+    public V put(K key, V value) {
+        if (!map.containsKey(key)) {
+            list.add(key);
+        }
+        return map.put(key, value);
     }
 
     @Override

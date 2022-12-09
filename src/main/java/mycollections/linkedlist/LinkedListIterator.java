@@ -7,8 +7,8 @@ import java.util.NoSuchElementException;
  * @author Moussa
  */
 public class LinkedListIterator<T> implements ListIterator<T> {
-    private Node<T> lastReturned = null;
     private final LinkedList<T> list;
+    private Node<T> lastReturned = null;
     private int index;
     private Node<T> prev;
 

@@ -20,18 +20,22 @@ public class SortedArray<T> implements Collection<T> {
     }
 
     @Override
-    public int size() {
-        return list.size();
+    public boolean addAll(Collection<? extends T> c) {
+        for (T t : c) {
+            add(t);
+        }
+        return true;
     }
 
     @Override
-    public boolean isEmpty() {
-        return list.isEmpty();
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        return find(o) != -1;
+    public boolean add(T t) {
+        int index = find(t);
+        if (index == -1) {
+            list.add(t);
+        } else {
+            list.add(index, t);
+        }
+        return true;
     }
 
     @SuppressWarnings("unchecked")
@@ -53,6 +57,16 @@ public class SortedArray<T> implements Collection<T> {
     }
 
     @Override
+    public int size() {
+        return list.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
+    @Override
     public Iterator<T> iterator() {
         return list.iterator();
     }
@@ -68,23 +82,6 @@ public class SortedArray<T> implements Collection<T> {
     }
 
     @Override
-    public boolean add(T t) {
-        int index = find(t);
-        if (index == -1) {
-            list.add(t);
-        } else {
-            list.add(index, t);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        list.remove(o);
-        return false;
-    }
-
-    @Override
     public boolean containsAll(Collection<?> c) {
         for (Object o : c) {
             if (!contains(o)) {
@@ -95,11 +92,8 @@ public class SortedArray<T> implements Collection<T> {
     }
 
     @Override
-    public boolean addAll(Collection<? extends T> c) {
-        for (T t : c) {
-            add(t);
-        }
-        return true;
+    public boolean contains(Object o) {
+        return find(o) != -1;
     }
 
     @Override
@@ -109,6 +103,12 @@ public class SortedArray<T> implements Collection<T> {
             changed = changed || remove(o);
         }
         return changed;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        list.remove(o);
+        return false;
     }
 
     @Override

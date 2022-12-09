@@ -76,6 +76,12 @@ public class LinkedList<T> implements List<T> {
         return node;
     }
 
+    private void checkIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index out of bounds.");
+        }
+    }
+
     /*default*/ void unlink(Node<T> node) {
         if (node == first) {
             first = node.next;
@@ -85,12 +91,6 @@ public class LinkedList<T> implements List<T> {
             node.next.prev = node.prev;
         }
         size--;
-    }
-
-    private void checkIndex(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index out of bounds.");
-        }
     }
 
     @Override
